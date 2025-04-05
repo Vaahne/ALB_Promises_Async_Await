@@ -52,3 +52,7 @@ Promise.all([getUserData(3),getUserData(7),getUserData(9)])
   console.log(msg)
 })
 
+// data from Allsettled 
+Promise.allSettled([getUserData(1),getUserData(6)]).then((msg)=>{
+  console.log(msg)
+})
