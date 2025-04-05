@@ -7,18 +7,36 @@ function getUserData(id) {
     db2: db2,
     db3: db3
   };
- 
-  async function getData(id){
+//  using Async/Await
+  async function getData(){
 
     let getDB = await central(id);
     let data1 = await dbs[getDB](id);
     let data2 = await vault(id);
-    
-    let data = Object.assign(data1,data2);
-    console.log( data);
-   return data;
+    let data = Object.assign({},data1,data2);
+
+    return data;
   }
-   return getData(id);
+
+  function usingPromises(){
+    return central(id)
+    .then((getDB)=>{
+      return dbs[getDB](id)
+    })
+    .then((data1)=>{
+      return vault(id).then((data2)=>{
+          let data;
+          data = Object.assign({},data1,data2);
+          return data;
+      })
+    })
+    .catch((err)=>{
+      console.error(err.message)
+    })    
+  }
+  return usingPromises();
+//   return getData();
+
 }
 
-console.log(getUserData(8));
+getUserData(2).then((data) => console.log(data));
