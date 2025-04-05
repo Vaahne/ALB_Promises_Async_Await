@@ -7,6 +7,7 @@ function getUserData(id) {
     db2: db2,
     db3: db3
   };
+
 //  using Async/Await
   async function getData(){
 
@@ -18,6 +19,7 @@ function getUserData(id) {
     return data;
   }
 
+// using promises
   function usingPromises(){
     return central(id)
     .then((getDB)=>{
@@ -34,9 +36,19 @@ function getUserData(id) {
       console.error(err.message)
     })    
   }
-  return usingPromises();
-//   return getData();
+
+  return usingPromises();   // Data using promises
+//   return getData();      // Data using async/await
 
 }
 
-getUserData(2).then((data) => console.log(data));
+// data from db1 
+ getUserData(2).then((data) => console.log(data));
+
+
+// All data from 3 different dbs will be displayed in an array.
+Promise.all([getUserData(3),getUserData(7),getUserData(9)])
+.then((msg)=>{
+  console.log(msg)
+})
+
