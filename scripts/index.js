@@ -38,6 +38,8 @@ function getUserData(id) {
   }
 
   return usingPromises();   // Data using promises
+
+// comment above line and uncomment below line to use async/await approach
 //   return getData();      // Data using async/await
 
 }
